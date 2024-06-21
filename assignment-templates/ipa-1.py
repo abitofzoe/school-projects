@@ -5,8 +5,6 @@
 This assignment will develop your basic familiarity with Python.
 '''
 
-import math
-
 def savings(gross_pay, tax_rate, expenses):
     '''Savings.
     5 points.
@@ -35,10 +33,15 @@ def savings(gross_pay, tax_rate, expenses):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    return str( math.floor(gross_pay - (gross_pay * tax_rate)) - expenses )  + " centavos"
+    import math
+    return math.floor(gross_pay - (gross_pay * tax_rate)) - expenses
 
+savings(10000, 0.10, 3000)
+
+'''
 print(savings(int(input("gross_pay: ")), float(input("tax_rate: ")), int(input("expenses: "))))
 print("")
+'''
 
 def material_waste(total_material, material_units, num_jobs, job_consumption):
     '''Material Waste.
@@ -75,8 +78,7 @@ def material_waste(total_material, material_units, num_jobs, job_consumption):
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     return str(total_material - (job_consumption * num_jobs)) + material_units
     
-print(material_waste( int(input("total_material: ")), str(input("material_units: ")), int(input("num_jobs: ")), int(input("job_consumption: "))))
-print("")
+material_waste(100, "L", 5, 5)
 
 def interest(principal, rate, periods):
     '''Interest.
@@ -106,10 +108,10 @@ def interest(principal, rate, periods):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    return str(math.floor(principal * (1 + (rate * periods)))) + " centavos"
+    import math
+    return math.floor(principal * (1 + (rate * periods)))
     
-print(interest( int(input("principal: ")), float(input("rate: ")), int(input("periods: "))))
-print("")
+interest(100000, 0.02, 12)
 
 def body_mass_index(weight, height):
     '''Body Mass Index.
@@ -152,6 +154,6 @@ def body_mass_index(weight, height):
     height[1] += height[0] * FEET_TO_INCH
     height[1] *= INCH_TO_METER
     weight /= KG_TO_LBS
-    return str(round((weight / ( height[1]**2 )), 2))
+    return round((weight / ( height[1]**2 )), 2)
 
-print(body_mass_index( float(input("weight: ")), list(( int(input("feet: ")), int(input("inches: ")) )) ))
+body_mass_index( 120.0, list(( 5, 7 )) )
