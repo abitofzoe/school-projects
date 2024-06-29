@@ -48,11 +48,80 @@ def shift_letter(letter, shift):
         NO_OP = False
         letter = message[x]
         letter = ord(letter[0])
-        '''if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
-            letter = letter + ord('Z') - ord('a') + 1'''
+        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
+            letter = letter + ord('Z') - ord('a') + 1
         if (shift == '_' or letter == ord(' ')):
             NO_OP = True
-            oldshift = shift
+            shift = 0
+        letter += shift
+        raw_letter = letter
+        if (NO_OP != True):
+            raw_letter %= ord('A')
+            raw_letter += ord('A')
+        
+            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
+                letter = raw_letter
+            if (raw_letter > ord('Z')):
+                letter = raw_letter + ord('a') - ord('Z') - 1
+                raw_letter += ord('a') - ord('Z') - 1
+            '''if (raw_letter > ord('z')):
+                raw_letter %= ord('z')
+                raw_letter += ord('A') - 1
+                letter = raw_letter'''
+        
+        letter = str(chr(letter))
+        message_list[x] = letter
+        '''print(message_list[x])'''
+    
+    message = "".join(message_list)
+    letter = message
+    
+    return (str(letter) + " " + str(ord(letter)) + " " + str(raw_letter))
+    
+'''print(shift_letter('a', 15))
+print(shift_letter('A', 15))
+print(shift_letter('c', 1500))
+print(shift_letter('C', 1500))'''
+
+for x in range (400):
+    print(shift_letter('a', x) + " " + str(x))
+
+def caesar_cipher(message, shift):
+    '''Caesar Cipher.
+    10 points.
+
+    Apply a shift number to a string of uppercase English letters and spaces.
+
+    Parameters
+    ----------
+    message: str
+        a string of uppercase English letters and spaces.
+    shift: int
+        the number by which to shift the letters.
+
+    Returns
+    -------
+    str
+        the message, shifted appropriately.
+    '''
+    # Replace `pass` with your code.
+    # Stay within the function. Only use the parameters as input. The function should return your answer.
+    
+    message = letter.upper()
+    length = len(message)
+    '''print(length)'''
+    message_list = list(message)
+    '''print(message_list)'''
+    oldshift = shift
+    for x in range(length):
+        shift = oldshift
+        NO_OP = False
+        letter = message[x]
+        letter = ord(letter[0])
+        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
+            letter = letter + ord('Z') - ord('a') + 1
+        if (shift == '_' or letter == ord(' ')):
+            NO_OP = True
             shift = 0
         letter += shift
         raw_letter = letter
@@ -76,82 +145,6 @@ def shift_letter(letter, shift):
     
     message = "".join(message_list)
     letter = message
-    
-    return (str(letter) + " " + str(ord(letter)) + " " + str(raw_letter))
-    
-'''print(shift_letter('a', 15))
-print(shift_letter('A', 15))
-print(shift_letter('c', 1500))
-print(shift_letter('C', 1500))'''
-
-for x in range (52):
-    print(shift_letter('a', x))
-
-def caesar_cipher(message, shift):
-    '''Caesar Cipher.
-    10 points.
-
-    Apply a shift number to a string of uppercase English letters and spaces.
-
-    Parameters
-    ----------
-    message: str
-        a string of uppercase English letters and spaces.
-    shift: int
-        the number by which to shift the letters.
-
-    Returns
-    -------
-    str
-        the message, shifted appropriately.
-    '''
-    # Replace `pass` with your code.
-    # Stay within the function. Only use the parameters as input. The function should return your answer.
-    
-    length = len(message)
-    '''print(length)'''
-    message_list = list(message)
-    print(message_list)
-    oldshift = shift
-    for x in range(length):
-        shift = oldshift
-        NO_OP = False
-        letter = message[x]
-        letter = ord(letter[0])
-        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
-            letter = letter + ord('Z') - ord('a') + 1
-        if (shift == '_' or letter == ord(' ')):
-            NO_OP = True
-            oldshift = shift
-            shift = 0
-        letter += shift
-        raw_letter = letter
-        if (NO_OP != True):
-            raw_letter %= ord('A')
-            raw_letter += ord('A')
-        
-            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
-                letter = raw_letter
-            if (raw_letter > ord('Z')):
-                letter = raw_letter + ord('a') - ord('Z') - 1
-                raw_letter += ord('a') - ord('Z') - 1
-            if (raw_letter > ord('z')):
-                raw_letter %= ord('z')
-                raw_letter += ord('A') - 1
-                letter = raw_letter
-        
-        '''while (raw_letter < ord('A') or raw_letter > ord('Z')):
-            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
-                letter = raw_letter
-            if (raw_letter > ord('Z')):
-                letter = raw_letter % ord('Z') + ord('A') - 1
-                raw_letter = raw_letter % ord('Z') + ord('A') - 1'''
-        
-        letter = str(chr(letter)).upper()
-        message_list[x] = letter
-        '''print(message_list[x])'''
-    
-    message = "".join(message_list)
     return message
     
 '''print(caesar_cipher("test lah", 20))'''
