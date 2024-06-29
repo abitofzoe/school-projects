@@ -42,6 +42,7 @@ def shift_letter(letter, shift):
     '''print(length)'''
     message_list = list(message)
     '''print(message_list)'''
+    shift %= 26
     oldshift = shift
     for x in range(length):
         shift = oldshift
@@ -64,12 +65,12 @@ def shift_letter(letter, shift):
             if (raw_letter > ord('Z')):
                 letter = raw_letter + ord('a') - ord('Z') - 1
                 raw_letter += ord('a') - ord('Z') - 1
-            '''if (raw_letter > ord('z')):
+            if (raw_letter > ord('z')):
                 raw_letter %= ord('z')
                 raw_letter += ord('A') - 1
-                letter = raw_letter'''
+                letter = raw_letter
         
-        letter = str(chr(letter))
+        letter = str(chr(letter)).upper()
         message_list[x] = letter
         '''print(message_list[x])'''
     
@@ -83,8 +84,8 @@ print(shift_letter('A', 15))
 print(shift_letter('c', 1500))
 print(shift_letter('C', 1500))'''
 
-for x in range (400):
-    print(shift_letter('a', x) + " " + str(x))
+'''for x in range (104):
+    print(shift_letter('a', x))'''
 
 def caesar_cipher(message, shift):
     '''Caesar Cipher.
@@ -107,11 +108,12 @@ def caesar_cipher(message, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     
-    message = letter.upper()
+    message = message.upper()
     length = len(message)
     '''print(length)'''
     message_list = list(message)
     '''print(message_list)'''
+    shift %= 26
     oldshift = shift
     for x in range(length):
         shift = oldshift
@@ -147,7 +149,7 @@ def caesar_cipher(message, shift):
     letter = message
     return message
     
-'''print(caesar_cipher("test lah", 20))'''
+print(caesar_cipher("test lah", 25))
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter.
