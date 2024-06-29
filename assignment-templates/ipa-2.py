@@ -77,7 +77,7 @@ def shift_letter(letter, shift):
     message = "".join(message_list)
     letter = message
     
-    return (str(letter) + " " + str(ord(letter)) + " " + str(raw_letter))
+    return (str(letter))
     
 '''print(shift_letter('a', 15))
 print(shift_letter('A', 15))
@@ -149,7 +149,7 @@ def caesar_cipher(message, shift):
     letter = message
     return message
     
-print(caesar_cipher("test lah", 25))
+'''print(caesar_cipher("test lah", 1))'''
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter.
@@ -179,7 +179,53 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    shift = letter_shift.upper()
+    shift = ord(shift)
+    shift -= ord('A')
+    
+    message = letter
+    message = message.upper()
+    length = len(message)
+    '''print(length)'''
+    message_list = list(message)
+    '''print(message_list)'''
+    shift %= 26
+    oldshift = shift
+    for x in range(length):
+        shift = oldshift
+        NO_OP = False
+        letter = message[x]
+        letter = ord(letter[0])
+        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
+            letter = letter + ord('Z') - ord('a') + 1
+        if (shift == '_' or letter == ord(' ')):
+            NO_OP = True
+            shift = 0
+        letter += shift
+        raw_letter = letter
+        if (NO_OP != True):
+            raw_letter %= ord('A')
+            raw_letter += ord('A')
+        
+            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
+                letter = raw_letter
+            if (raw_letter > ord('Z')):
+                letter = raw_letter + ord('a') - ord('Z') - 1
+                raw_letter += ord('a') - ord('Z') - 1
+            if (raw_letter > ord('z')):
+                raw_letter %= ord('z')
+                raw_letter += ord('A') - 1
+                letter = raw_letter
+        
+        letter = str(chr(letter)).upper()
+        message_list[x] = letter
+        '''print(message_list[x])'''
+    
+    message = "".join(message_list)
+    letter = message
+    return message
+    
+'''print(shift_by_letter('B', 'B'))'''
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher.
@@ -212,7 +258,68 @@ def vigenere_cipher(message, key):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+    
+    message = message.upper()
+    length = len(message)
+    keylength = len(key)
+    string_shift = ['A'] * length
+    
+    if (keylength >= length):
+        for x in range(length):
+            string_shift[x] = key[x]
+    else:
+        origlength = len(key)
+        current_index = 0
+        while (current_index < length):
+            for x in range(origlength):
+                '''print(current_index)'''
+                if (current_index < length):
+                    string_shift[current_index] = key[x]
+                current_index += 1
+    '''print(string_shift)'''
+            
+        
+    message_list = list(message)
+    
+    for x in range(length):
+        letter_shift = string_shift[x]
+        shift = letter_shift.upper()
+        shift = ord(shift)
+        shift -= ord('A')
+        NO_OP = False
+        letter = message[x]
+        letter = ord(letter[0])
+        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
+            letter = letter + ord('Z') - ord('a') + 1
+        if (shift == '_' or letter == ord(' ')):
+            NO_OP = True
+            shift = 0
+        letter += shift
+        raw_letter = letter
+        if (NO_OP != True):
+            raw_letter %= ord('A')
+            raw_letter += ord('A')
+        
+            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
+                letter = raw_letter
+            if (raw_letter > ord('Z')):
+                letter = raw_letter + ord('a') - ord('Z') - 1
+                raw_letter += ord('a') - ord('Z') - 1
+            if (raw_letter > ord('z')):
+                raw_letter %= ord('z')
+                raw_letter += ord('A') - 1
+                letter = raw_letter
+        
+        letter = str(chr(letter)).upper()
+        message_list[x] = letter
+        '''print(message_list[x])'''
+
+    message = "".join(message_list)
+    letter = message
+    return message
+    
+print(vigenere_cipher('TEST', 'AB'))
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
