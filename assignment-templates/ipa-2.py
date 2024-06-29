@@ -319,7 +319,7 @@ def vigenere_cipher(message, key):
     letter = message
     return message
     
-print(vigenere_cipher('TEST', 'AB'))
+'''print(vigenere_cipher('TEST', 'AB'))'''
 
 def scytale_cipher(message, shift):
     '''Scytale Cipher.
@@ -373,7 +373,65 @@ def scytale_cipher(message, shift):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    message = message.upper()
+    length = len(message)
+    '''print(length)'''
+    message_list = list(message)
+    '''print(message_list)'''
+    shift %= 26
+    overflow = 0
+    
+    if (length % shift != 0):
+        buffer = ['A'] * ((int(length / shift) + 1) * shift)
+        overflow = ((int(length / shift) + 1) * shift) - length
+        max_index = ((int(length / shift) + 1) * shift) - 1
+        x = ((int(length / shift) + 1) * shift) - overflow
+        while (x <= max_index):
+            buffer[x] = '_'
+            x += 1
+    else:
+        buffer = ['A'] * length
+        for x in range(length):
+            buffer[x] = message[x]
+    
+    print(buffer)
+            
+    
+    '''for x in range(length):
+        shift = oldshift
+        NO_OP = False
+        letter = message[x]
+        letter = ord(letter[0])
+        if (letter >= ord('a') and (shift != '_' or letter != ord(' '))):
+            letter = letter + ord('Z') - ord('a') + 1
+        if (shift == '_' or letter == ord(' ')):
+            NO_OP = True
+            shift = 0
+        letter += shift
+        raw_letter = letter
+        if (NO_OP != True):
+            raw_letter %= ord('A')
+            raw_letter += ord('A')
+        
+            if (raw_letter >= ord('A') and raw_letter <= ord('Z')):
+                letter = raw_letter
+            if (raw_letter > ord('Z')):
+                letter = raw_letter + ord('a') - ord('Z') - 1
+                raw_letter += ord('a') - ord('Z') - 1
+            if (raw_letter > ord('z')):
+                raw_letter %= ord('z')
+                raw_letter += ord('A') - 1
+                letter = raw_letter
+        
+        letter = str(chr(letter)).upper()
+        message_list[x] = letter
+        print(message_list[x])'''
+    
+    '''message = "".join(message_list)
+    letter = message
+    return message'''
+
+print(scytale_cipher('testtest', 6))
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
