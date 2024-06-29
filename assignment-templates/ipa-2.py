@@ -391,8 +391,8 @@ def scytale_cipher(message, shift):
             x += 1
     else:
         buffer = ['A'] * length
-        for x in range(length):
-            buffer[x] = message[x]
+    for x in range(length):
+        buffer[x] = message[x]
     
     print(buffer)
             
@@ -431,7 +431,7 @@ def scytale_cipher(message, shift):
     letter = message
     return message'''
 
-print(scytale_cipher('testtest', 6))
+print(scytale_cipher('testtest', 2))
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
