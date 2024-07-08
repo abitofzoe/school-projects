@@ -397,7 +397,7 @@ def scytale_cipher(message, shift):
     print(buffer)
             
     for index in range(length):
-        buffer[index] = message[(index // shift) + (len(message) // shift) * (index % shift)]
+        buffer[index] = message[(index // shift) + ((length // shift) * (index % shift))]
         
     return "".join(buffer)
     
@@ -435,7 +435,7 @@ def scytale_cipher(message, shift):
     letter = message
     return message'''
 
-print(scytale_cipher('ALGORITHMS_ARE_IMPORTANT', 8))
+print(scytale_cipher('INFORMATION_AGE', 4))
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
