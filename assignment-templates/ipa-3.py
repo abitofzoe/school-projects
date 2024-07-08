@@ -110,7 +110,7 @@ social_graph = {
     },
 }
 
-print(relationship_status("@eeebeee", "@jobenilagan", social_graph))
+# print(relationship_status("@eeebeee", "@jobenilagan", social_graph))
 
 # relationship_status("@joeilagan", "@jobenilagan", social_graph)
 
@@ -140,7 +140,145 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    
+    rows = len(board)
+    cols = len(board[0])
+    # return (str(len(board[0])))
+    #print(board)
+    
+    def check_horizontal_win(board, rows, cols):
+        for x in range(rows):
+            consistent_X = True
+            consistent_O = True
+            for y in range(cols):
+                if (board[x][y] == 'X'):
+                    consistent_O = False
+                if (board[x][y] == 'O'):
+                    consistent_X = False
+                if (board[x][y] == ''):
+                    consistent_X = False
+                    consistent_O = False
+            if (consistent_X == True):
+                return str("X")
+            if (consistent_O == True):
+                return str("O")
+                
+    def check_vertical_win(board, rows, cols):
+        for x in range(rows):
+            consistent_X = True
+            consistent_O = True
+            for y in range(cols):
+                if (board[y][x] == 'X'):
+                    consistent_O = False
+                if (board[y][x] == 'O'):
+                    consistent_X = False
+                if (board[y][x] == ''):
+                    consistent_X = False
+                    consistent_O = False
+            if (consistent_X == True):
+                return str("X")
+            if (consistent_O == True):
+                return str("O")
+                
+    def check_diagonal_win(board, rows, cols):
+        #easiest one yet, LOTS OF ASSUMPTIONS AND SHORTCUTS TAKEN but this stupid thing should work.
+        consistent_X = True
+        consistent_O = True
+        for x in range(rows):
+            if (board[x][x] == 'X'):
+                consistent_O = False
+            if (board[x][x] == 'O'):
+                consistent_X = False
+            if (board[x][x] == ''):
+                consistent_X = False
+                consistent_O = False
+        if (consistent_X == True):
+            return str("X")
+        if (consistent_O == True):
+            return str("O")
+    
+    if (check_horizontal_win(board, rows, cols) == 'X' or check_vertical_win(board, rows, cols) == 'X' or check_diagonal_win(board, rows, cols) == 'X'):
+        return "X"
+    if (check_horizontal_win(board, rows, cols) == 'O' or check_vertical_win(board, rows, cols) == 'O' or check_diagonal_win(board, rows, cols) == 'O'):
+        return "O"
+    return str("NO WINNER")
+    
+    #print(check_horizontal_win(board, rows, cols))
+    #print(check_vertical_win(board, rows, cols))
+    #print(check_diagonal_win(board, rows, cols))
+'''
+Sample data for Tic Tac Toe below:
+'''
+
+board1 = [
+['X','X','O'],
+['O','X','O'],
+['O','','X'],
+] #X
+
+board2 = [
+['X','X','O'],
+['O','X','O'],
+['','O','X'],
+] #X
+
+board3 = [
+['O','X','O'],
+['','O','X'],
+['X','X','O'],
+] #O
+
+board4 = [
+['X','X','X'],
+['O','X','O'],
+['O','','O'],
+] #X
+
+board5 = [
+['X','X','O'],
+['O','X','O'],
+['X','','O'],
+] #O
+
+board6 = [
+['X','X','O'],
+['O','X','O'],
+['X','',''],
+] #NO WINNER
+
+board7 = [
+['X','X','O',''],
+['O','X','O','O'],
+['X','','','O'],
+['O','X','','']
+] #NO WINNER
+
+board8 = [
+['X','X','O'],
+['O','O','X'],
+['X','',''],
+] #NO WINNER
+
+board9 = [
+['X','X','O',''],
+['O','X','O','O'],
+['X','','O','O'],
+['X','X','X','X']
+] #X
+
+#print(tic_tac_toe(board8))
+#tic_tac_toe(board9)
+
+#print(tic_tac_toe(board1)) #X
+#print(tic_tac_toe(board2)) #X
+#print(tic_tac_toe(board3)) #O
+#print(tic_tac_toe(board4)) #NO WINNER
+#print(tic_tac_toe(board5)) #O
+#print(tic_tac_toe(board6)) #NO WINNER
+#print(tic_tac_toe(board7)) #NO WINNER
+#print(tic_tac_toe(board8)) #NO WINNER
+#print(tic_tac_toe(board9)) #X
+
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
