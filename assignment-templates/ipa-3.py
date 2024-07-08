@@ -311,4 +311,111 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+
+    route_map_list = list(route_map.keys())
+    route_map_values = list(route_map.values())
+    route_map_list_length = len(route_map_list)
+    route_map_values_length = len(route_map_values)
+    
+    #print(first_stop)
+    
+    route_map_values_ordered = [0] * route_map_values_length
+    route_map_list_ordered = ['0'] * route_map_values_length * 2
+    for x in range(len(route_map_values)):
+        string = str(route_map_values[x])
+        string = string.split()
+        string = string[1]
+        string = string.split("}")
+        string = string[0]
+        route_map_values_ordered[x] = int(string)
+    #print(route_map_values_ordered)
+    #print(route_map_list)
+    
+    for x in range(len(route_map_list)):
+        string = str(route_map_list[x])
+        string = string.split("', '")
+        string_1 = ""
+        string_2 = ""
+        for y in range(len(string)):
+            string_1 = str(string[0])
+            string_1 = string_1.split("('")
+            string_1 = string_1[1]
+            string_2 = str(string[1])
+            string_2 = string_2.split("')")
+            string_2 = string_2[0]
+        route_map_list_ordered[x * 2] = string_1
+        route_map_list_ordered[(x * 2) + 1] = string_2
+
+    #print(route_map_list_ordered)
+    #print(route_map_values_ordered)
+    
+    route_map_list_no_duplicates = ['0'] * int(len(route_map_list_ordered) / 2)
+    i = 0
+    j = 0
+    while (i < len(route_map_list_ordered)):
+        route_map_list_no_duplicates[j] = route_map_list_ordered[i]
+        i += 2
+        j += 1
+    
+    #print(route_map_list_no_duplicates)
+    
+    route_map_list = route_map_list_no_duplicates
+    route_map_values = route_map_values_ordered
+    
+    position_first_stop = route_map_list.index(first_stop)
+    position_second_stop = route_map_list.index(second_stop)
+    
+    print(position_first_stop)
+    print(position_second_stop)
+
+'''
+Sample data for ETA below:
+
+(from_stop, to_stop)
+'''
+
+legs = {
+    ('a1', 'a2'): {
+        'travel_time_mins': 10
+    },
+    ('a2', 'b1'): {
+        'travel_time_mins': 10230
+    },
+    ('b1', 'c1'): {
+        'travel_time_mins': 1
+    },
+    ('c1', 'c2'): {
+        'travel_time_mins': 5
+    },
+    ('c2', 'd1'): {
+        'travel_time_mins': 15
+    },
+    ('d1', 'd2'): {
+        'travel_time_mins': 17
+    },
+    ('d2', 'e1'): {
+        'travel_time_mins': 20
+    },
+    ('e1', 'e2'): {
+        'travel_time_mins': 25
+    },
+    ('e2', 'a1'): {
+        'travel_time_mins': 30
+    }
+}
+
+legs_2 = {
+     ("upd","admu"):{
+         "travel_time_mins":10
+     },
+     ("admu","dlsu"):{
+         "travel_time_mins":35
+     },
+     ("dlsu","upd"):{
+         "travel_time_mins":55
+     }
+}
+
+#print(eta('a2', 'b1', legs))
+eta('a1', 'a2', legs)
+#eta("upd", "admu", legs_2)
