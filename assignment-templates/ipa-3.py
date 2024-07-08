@@ -347,6 +347,10 @@ def eta(first_stop, second_stop, route_map):
         route_map_list_ordered[(x * 2) + 1] = string_2
 
     #print(route_map_list_ordered)
+    
+    for x in range(len(route_map_values_ordered)):
+        route_map_values_ordered[0] += route_map_values_ordered[x]
+    
     #print(route_map_values_ordered)
     
     route_map_list_no_duplicates = ['0'] * int(len(route_map_list_ordered) / 2)
@@ -365,17 +369,16 @@ def eta(first_stop, second_stop, route_map):
     position_first_stop = route_map_list.index(first_stop)
     position_second_stop = route_map_list.index(second_stop)
     
-    print(position_first_stop)
-    print(position_second_stop)
-    
-    print(route_map_list)
-    print(route_map_values)
-    
     calculated_steps = position_second_stop - position_first_stop
     calculated_time = 0
     for x in range(calculated_steps):
         calculated_time += route_map_values[position_first_stop + x + 1]
-    print(calculated_time)
+    
+    #special case for same start and destination
+    if (position_second_stop - position_first_stop == 0):
+        calculated_time = route_map_values_ordered[0]
+    
+    return int(calculated_time)
 
 '''
 Sample data for ETA below:
@@ -425,6 +428,6 @@ legs_2 = {
      }
 }
 
-#print(eta('a2', 'b1', legs))
-eta('a1', 'e2', legs)
-#eta("upd", "admu", legs_2)
+print(eta('a2', 'a2', legs))
+#eta('a1', 'e2', legs)
+#print(eta("admu", "admu", legs_2))
