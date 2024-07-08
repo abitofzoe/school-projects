@@ -319,7 +319,7 @@ def eta(first_stop, second_stop, route_map):
     
     #print(first_stop)
     
-    route_map_values_ordered = [0] * route_map_values_length
+    route_map_values_ordered = [0] * int(route_map_values_length + 1)
     route_map_list_ordered = ['0'] * route_map_values_length * 2
     for x in range(len(route_map_values)):
         string = str(route_map_values[x])
@@ -327,7 +327,7 @@ def eta(first_stop, second_stop, route_map):
         string = string[1]
         string = string.split("}")
         string = string[0]
-        route_map_values_ordered[x] = int(string)
+        route_map_values_ordered[x + 1] = int(string)
     #print(route_map_values_ordered)
     #print(route_map_list)
     
@@ -367,6 +367,15 @@ def eta(first_stop, second_stop, route_map):
     
     print(position_first_stop)
     print(position_second_stop)
+    
+    print(route_map_list)
+    print(route_map_values)
+    
+    calculated_steps = position_second_stop - position_first_stop
+    calculated_time = 0
+    for x in range(calculated_steps):
+        calculated_time += route_map_values[position_first_stop + x + 1]
+    print(calculated_time)
 
 '''
 Sample data for ETA below:
@@ -417,5 +426,5 @@ legs_2 = {
 }
 
 #print(eta('a2', 'b1', legs))
-eta('a1', 'a2', legs)
+eta('a1', 'e2', legs)
 #eta("upd", "admu", legs_2)
