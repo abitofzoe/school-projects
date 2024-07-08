@@ -366,6 +366,31 @@ def eta(first_stop, second_stop, route_map):
     route_map_list = route_map_list_no_duplicates
     route_map_values = route_map_values_ordered
     
+    route_map_list_mirrored = ['0'] * len(route_map_list)
+    route_map_values_mirrored = [0] * len(route_map_values)
+    
+    i = len(route_map_values) - 1
+    j = 0
+    while (i >= 0):
+        route_map_values_mirrored[i] = route_map_values[j]
+        i -= 1
+        j += 1
+    i = len(route_map_list) - 1
+    j = 0
+    route_map_values_mirrored[len(route_map_values) - 1] += route_map_values_mirrored[0]
+    route_map_values_mirrored[0] = route_map_values_mirrored[len(route_map_values) - 1] - route_map_values_mirrored[0]
+    route_map_values_mirrored[0] = route_map_values_mirrored[len(route_map_values) - 1] - route_map_values_mirrored[0]
+    route_map_values_mirrored[len(route_map_values) - 1] -= route_map_values_mirrored[0]
+    while (i >= 0):
+        route_map_list_mirrored[i] = route_map_list[j]
+        i -= 1
+        j += 1
+    
+    print(route_map_list)
+    print(route_map_values_ordered)
+    print(route_map_list_mirrored)
+    print(route_map_values_mirrored)
+    
     position_first_stop = route_map_list.index(first_stop)
     position_second_stop = route_map_list.index(second_stop)
     
@@ -428,6 +453,6 @@ legs_2 = {
      }
 }
 
-print(eta('a2', 'a2', legs))
+print(eta('c2', 'a2', legs))
 #eta('a1', 'e2', legs)
 #print(eta("admu", "admu", legs_2))
