@@ -196,10 +196,27 @@ def tic_tac_toe(board):
             return str("X")
         if (consistent_O == True):
             return str("O")
+            
+    def check_diagonal_win_2(board, rows, cols):
+        #easiest one yet, LOTS OF ASSUMPTIONS AND SHORTCUTS TAKEN but this stupid thing should work.
+        consistent_X = True
+        consistent_O = True
+        for x in range(rows):
+            if (board[cols - 1 - x][x] == 'X'):
+                consistent_O = False
+            if (board[cols - 1 - x][x] == 'O'):
+                consistent_X = False
+            if (board[cols - 1 - x][x] == ''):
+                consistent_X = False
+                consistent_O = False
+        if (consistent_X == True):
+            return str("X")
+        if (consistent_O == True):
+            return str("O")
     
-    if (check_horizontal_win(board, rows, cols) == 'X' or check_vertical_win(board, rows, cols) == 'X' or check_diagonal_win(board, rows, cols) == 'X'):
+    if (check_horizontal_win(board, rows, cols) == 'X' or check_vertical_win(board, rows, cols) == 'X' or check_diagonal_win(board, rows, cols) == 'X' or check_diagonal_win_2(board, rows, cols) == 'X'):
         return "X"
-    if (check_horizontal_win(board, rows, cols) == 'O' or check_vertical_win(board, rows, cols) == 'O' or check_diagonal_win(board, rows, cols) == 'O'):
+    if (check_horizontal_win(board, rows, cols) == 'O' or check_vertical_win(board, rows, cols) == 'O' or check_diagonal_win(board, rows, cols) == 'O' or check_diagonal_win(board, rows, cols) == 'O'):
         return "O"
     return str("NO WINNER")
     
@@ -266,6 +283,12 @@ board9 = [
 ['X','X','X','X']
 ] #X
 
+board10 = [
+['X','O','X'],
+['O','X','X'],
+['X','','O'],
+] #X
+
 #print(tic_tac_toe(board8))
 #tic_tac_toe(board9)
 
@@ -278,6 +301,7 @@ board9 = [
 #print(tic_tac_toe(board7)) #NO WINNER
 #print(tic_tac_toe(board8)) #NO WINNER
 #print(tic_tac_toe(board9)) #X
+#print(tic_tac_toe(board10)) #X
 
 
 def eta(first_stop, second_stop, route_map):
@@ -472,6 +496,6 @@ legs_2 = {
      }
 }
 
-print(eta('b1', 'a1', legs))
+#print(eta('b1', 'a1', legs))
 #eta('a1', 'a2', legs)
 #print(eta("admu", "admu", legs_2))
